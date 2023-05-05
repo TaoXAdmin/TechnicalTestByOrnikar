@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V110.DOM;
 using OpenQA.Selenium.DevTools.V110.Page;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
@@ -34,19 +35,19 @@ namespace TechnicalTestByOrnikar.Utils
             this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe(url));
         }
 
-        public void WaitElementVisibility(By locator) 
+        public void WaitElementVisibility(By locator)
         {
             this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
         }
 
-        public void WaitElementInvisibility(By locator) 
+        public void WaitElementInvisibility(By locator)
         {
             this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(locator));
         }
 
-        public bool VerifyIfElementExists(By locator) 
+        public bool VerifyIfElementExists(By locator)
         {
-            try 
+            try
             {
                 this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
                 return true;
@@ -63,7 +64,7 @@ namespace TechnicalTestByOrnikar.Utils
                 this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
                 return true;
             }
-            catch (WebDriverTimeoutException) 
+            catch (WebDriverTimeoutException)
             {
                 this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(webElemment));
 
@@ -71,8 +72,71 @@ namespace TechnicalTestByOrnikar.Utils
                 return false;
             }
         }
-        
-        publlic void
 
+        public void Navigaate(string url)
+        {
+            this.Driver.Navigate().GoToUrl(url);
+            Driver.Manage().Window.FullScreen();
+        }
+
+        public void Refresh()
+        {
+            this.Driver.Navigate().Refresh();
+        }
+
+        public void WaitElementExists(By locator)
+        {
+            this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
+        }
+
+        public void WaitUntilUrlContains(string partialUrl)
+        {
+            this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlContains(partialUrl));
+        }
+
+        public void WaitElementToBeClickable(By webElement)
+        {
+            this.webDriverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(webElement));
+        }
+
+        public void FocusElement(IWebElement webElement)
+        {
+            Actions action = new Actions(this.Driver);
+
+            action.MoveToElement(webElement).Perform();
+        }
+
+        public void NewTab()
+        {
+            ((IJavaScriptExecutor)this.Driver).ExecuteScript("window.open();");
+            this.Driver.SwitchTo().Window(this.Driver.WindowHandles[this.Driver.WindowHandles.Count - 1]);
+        }
+
+        public void PreviousTab()
+        {
+            this.Driver.SwitchTo().Window(this.Driver.WindowHandles[1]).Close();
+            this.Driver.SwitchTo().Window(this.Driver.WindowHandles[0]);
+        }
+
+        public string GetCurrentUrl()
+        {
+            return this.Driver.Url;
+        }
+
+        public void WaitForPageLoad()
+        {
+            this.webDriverWait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        public void MoveToElement(IWebElement webElement)
+        {
+            clicker.MoveToElement(webElement);
+            clicker.Perform();
+        }
+
+        public IWebElement FindElementUsingText(String searchText)
+        {
+            return this.Driver.FindElement(By.XPath("//*[contains(text(),'" + searchText + "']"));
+        }
     }
 }
