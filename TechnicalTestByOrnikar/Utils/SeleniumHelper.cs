@@ -16,10 +16,7 @@ namespace TechnicalTestByOrnikar.Utils
     {
         public IWebDriver Driver;
 
-        private readonly Actions clicker;
-
         private readonly WebDriverWait webDriverWait;
-
 
         public SeleniumHelper(IWebDriver driver)
         {
@@ -28,6 +25,11 @@ namespace TechnicalTestByOrnikar.Utils
             this.Driver.Manage().Window.Maximize();
 
             this.webDriverWait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+        }
+
+        public static  IWebDriver GetCurrentDriver()
+        {
+            return BaseSetup.GetBrowserInstance();
         }
 
         public void WaitPageRedirect(string url)
@@ -73,7 +75,7 @@ namespace TechnicalTestByOrnikar.Utils
             }
         }
 
-        public void Navigaate(string url)
+        public void Navigate(string url)
         {
             this.Driver.Navigate().GoToUrl(url);
             Driver.Manage().Window.FullScreen();
@@ -82,6 +84,11 @@ namespace TechnicalTestByOrnikar.Utils
         public void Refresh()
         {
             this.Driver.Navigate().Refresh();
+        }
+
+        public void Close()
+        {
+            this.Driver.Close();
         }
 
         public void WaitElementExists(By locator)
@@ -126,12 +133,6 @@ namespace TechnicalTestByOrnikar.Utils
         public void WaitForPageLoad()
         {
             this.webDriverWait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
-        }
-
-        public void MoveToElement(IWebElement webElement)
-        {
-            clicker.MoveToElement(webElement);
-            clicker.Perform();
         }
 
         public IWebElement FindElementUsingText(String searchText)
