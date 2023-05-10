@@ -11,6 +11,8 @@ using TechnicalTestByOrnikar.Steps;
 using TechnicalTestByOrnikar.Utils;
 using TechnicalTestByOrnikar.Validations;
 using TechnicalTestByOrnikar.drivers;
+using OpenQA.Selenium.DevTools.V110.Network;
+using OpenQA.Selenium.DevTools;
 
 namespace TechnicalTestByOrnikar.PageObjects
 {
@@ -19,11 +21,10 @@ namespace TechnicalTestByOrnikar.PageObjects
         SeleniumHelper seleniumHelper = new(Driver.chromeDriver);
 
         //////////////First Top Vertical Line of elements (mainly  NavBar)
-
         //Home Element refs and actions
         private static readonly By HomeLink = By.CssSelector("a[data-testid='go-to-home']");
 
-        private IWebElement HomeLinkAction
+        private static IWebElement HomeLinkAction
         {
             get
             {
@@ -37,25 +38,184 @@ namespace TechnicalTestByOrnikar.PageObjects
             HomeLinkAction.Click();
         }
 
-        //Home Element refs and actions
-
+        //Code Element refs and actions
         private static readonly By TheoryLink = By.CssSelector("a[data-testid='go-to-theory']");
 
-        private static readonly By DriverLicenseMenuContainer = By.CssSelector("a[data-testid='open-menu-permis-de-conduire']");
+        private IWebElement TheoryLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(TheoryLink);
+            }
+        }
 
+        public void ClickTheoryButton()
+        {
+            seleniumHelper.WaitElementExists(TheoryLink);
+            TheoryLinkAction.Click();
+        }
+
+        ////Driver License Context Menu elements and actions
+        //the contexte menu opening list
+        private static readonly By DriverLicenseMenuContainer = By.CssSelector("div[data-testid='open-menu-permis-de-conduire']");
+
+        private IWebElement DriverLicenseContextMenu
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(DriverLicenseMenuContainer);
+            }
+        }
+
+        public void ClickDriverLicenseContextMenu()
+        {
+            seleniumHelper.WaitElementExists(DriverLicenseMenuContainer);
+            DriverLicenseContextMenu.Click();
+        }
+
+        //Permis B element and actions
         private static readonly By PermisBLink = By.CssSelector("a[data-testid='go-to-permis-b']");
+        private IWebElement PermisBLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(PermisBLink);
+            }
+        }
 
+        public void ClickPermisBLink()
+        {
+            seleniumHelper.WaitElementExists(PermisBLink);
+            PermisBLinkAction.Click();
+        }
+
+        //Conduite Accompagnee element and actions
         private static readonly By ConduitAccompagneeLink = By.CssSelector("a[data-testid='go-to-conduite-accompagnee']");
 
+        private IWebElement ConduitAccompagneeLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(ConduitAccompagneeLink);
+            }
+        }
+
+        public void ClickConduitAccompagneeLink()
+        {
+            seleniumHelper.WaitElementExists(ConduitAccompagneeLink);
+            ConduitAccompagneeLinkAction.Click();
+        }
+
+        //Conduite a la carte element and actions
         private static readonly By ConduiteLink = By.CssSelector("a[data-testid='go-to-conduite-a-la-carte']");
 
+        private IWebElement ConduiteLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(ConduiteLink);
+            }
+        }
+
+        public void ClickConduiteLink()
+        {
+            seleniumHelper.WaitElementExists(ConduiteLink);
+            ConduiteLinkAction.Click();
+        }
+
+        //Financement CPF element and actions
         private static readonly By CPFLink = By.CssSelector("a[data-testid='go-to-financement-cpf']");
 
+        private IWebElement CPFLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(CPFLink);
+            }
+        }
+
+        public void ClickCPFLink()
+        {
+            seleniumHelper.WaitElementExists(CPFLink);
+            CPFLinkAction.Click();
+        }
+
+        //Assurance Auto  Element and actions
         private static readonly By InsurancePageLink = By.CssSelector("a[data-testid='go-to-insurance']");
 
+        private IWebElement InsurancePageLinkAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(InsurancePageLink);
+            }
+        }
+
+        public void ClickInsurancePageLink()
+        {
+            seleniumHelper.WaitElementExists(InsurancePageLink);
+            InsurancePageLinkAction.Click();
+        }
+
+        //Connexion Element and actions
         private static readonly By ConnexionBtn = By.CssSelector("div[data-testid='connection-button']");
 
-        //////////////Second part is Hook advertisement, happy man picture and begin online quotation 
+        private IWebElement ConnexionBtnAction
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(ConnexionBtn);
+            }
+        }
+        
+        public void ClickConnexionBtn()
+        {
+            seleniumHelper.WaitElementExists(ConnexionBtn);
+            ConnexionBtnAction.Click();
+            Driver.chromeDriver.Manage().Window.Maximize();
+            Thread.Sleep(5000);
+            Driver.chromeDriver.SwitchTo().Window(Driver.chromeDriver.WindowHandles.Last());
+        }
+
+        //Quotation element and action
+        private static readonly By JObtiensMonTarif = By.XPath("//*[@id=\"quote\"]/div/div/div[2]/div/div[2]/div/a[1]");
+
+        private static readonly By JeReprendsMonDevis = By.XPath("//*[@id=\"quote\"]/div/div/div[2]/div/div[2]/div/a[2]");
+
+        private IWebElement JObtiensMonTarifButton
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(JObtiensMonTarif);
+            }
+        }
+
+        private IWebElement JeReprendsMonDevisButton
+        {
+            get
+            {
+                return Driver.chromeDriver.FindElement(JeReprendsMonDevis);
+            }
+        }
+
+        public void ClickOnJObtiensMonTarifButton()
+        {
+            seleniumHelper.WaitElementExists(JObtiensMonTarif);
+            JObtiensMonTarifButton.Click();
+            Driver.chromeDriver.Manage().Window.Maximize();
+            Thread.Sleep(5000);
+            Driver.chromeDriver.SwitchTo().Window(Driver.chromeDriver.WindowHandles.Last());
+        }
+        public void ClickOnJeReprendsMonDevisButton()
+        {
+            seleniumHelper.WaitElementExists(JeReprendsMonDevis);
+            JeReprendsMonDevisButton.Click();
+            Driver.chromeDriver.Manage().Window.Maximize();
+            Thread.Sleep(5000);
+            Driver.chromeDriver.SwitchTo().Window(Driver.chromeDriver.WindowHandles.Last());
+        }
+
+        // Hook advertisement, happy man picture and begin online quotation 
 
         private static readonly By HappyManPicutre = By.XPath("//*[@id=\"quote\"]/div/img");
 
@@ -79,7 +239,7 @@ namespace TechnicalTestByOrnikar.PageObjects
 
         private static readonly By SatisfactionLabelSideInfo = By.XPath("//*[@id=\"quote\"]/div/div/div[3]/div/div/div[2]/div/div");
 
-        //////////////Third part wil be dedicated to the online chat
+        //////////////Third part wil be dedicated to the online chat and the cookies setting
 
         private static readonly By ChatImgBtn = By.XPath("//*[@id=\"crisp-chatbox\"]/div/a/span[2]/span/span[1]/span/span");
 
@@ -98,6 +258,16 @@ namespace TechnicalTestByOrnikar.PageObjects
         private static readonly By SmileySelection = By.XPath("//*[@id=\"crisp-chatbox\"]/div/div/div[2]/div/div[5]/div/div[2]/a[1]");
 
         private static readonly By GIFsSelection = By.XPath("//*[@id=\"crisp-chatbox\"]/div/div/div[2]/div/div[5]/div/div[2]/a[2]");
+
+        private static readonly By ContinueWithoutAcceptCookies = By.XPath("//*[@id=\"axeptio_overlay\"]/div/div/div[1]/div[1]/div[1]");
+
+        private static readonly By CookiesContainer = By.XPath("//*[@id=\"axeptio_overlay\"]/div/div/div[1]/div[1]/div[2]");
+
+        private static readonly By ChooseCookiesButton = By.XPath("//*[@id=\"axeptio_btn_configure\"]");
+
+        private static readonly By AcceptAllCookies = By.XPath("//*[@id=\"axeptio_btn_configure\"]");
+
+        private static readonly By ReadCookiesPolicy = By.XPath("//*[@id=\"axeptio_btn_configure\"]");
 
         //////////////4TH part shows 3 cards explaining why chosing OrinkarInsurance
 

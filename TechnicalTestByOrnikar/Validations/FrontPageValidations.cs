@@ -10,6 +10,7 @@ using TechnicalTestByOrnikar.Steps;
 using TechnicalTestByOrnikar.Utils;
 using TechTalk.SpecFlow.Events;
 using TechnicalTestByOrnikar.drivers;
+using OpenQA.Selenium.DevTools.V110.CSS;
 
 namespace TechnicalTestByOrnikar.Validations
 {
@@ -28,6 +29,11 @@ namespace TechnicalTestByOrnikar.Validations
         public static string OrnikarConduitePageUrl = "https://www.ornikar.com/conduite";
 
         public static string OrnikarFinancementCPFPageUrl = "https://www.ornikar.com/permis/demarches/financer-permis/cpf";
+
+        public static string OrnikarSouscriptionPageUrlResetTrue = "https://www.ornikar.com/assurance-auto/souscription?reset=true";
+
+        public static string OrnikarSouscriptionPageUrl = "https://www.ornikar.com/assurance-auto/souscription";
+
 
         SeleniumHelper seleniumHelper = new(Driver.chromeDriver);
 
@@ -71,6 +77,14 @@ namespace TechnicalTestByOrnikar.Validations
             return seleniumHelper.GetCurrentUrl() == OrnikarFinancementCPFPageUrl;
         }
 
+        public bool LandedOnOrnikarSouscriptionPageResetTrue()
+        {
+            return seleniumHelper.GetCurrentUrl() == OrnikarSouscriptionPageUrlResetTrue;
+        }
 
+        public bool LandedOnOrnikarSouscriptionPage()
+        {
+            return seleniumHelper.GetCurrentUrl() == OrnikarSouscriptionPageUrl;
+        }
     }
 }

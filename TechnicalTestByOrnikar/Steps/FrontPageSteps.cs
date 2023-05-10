@@ -12,17 +12,23 @@ using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using TechnicalTestByOrnikar.Utils;
+using TechnicalTestByOrnikar.drivers;
 
 namespace TechnicalTestByOrnikar.Steps
 {
     [Binding]
-    
     class FrontPageSteps
     {
         FrontPageValidations frontPageValidations = new();
 
         FrontPageObject frontPageObject = new();
-        
+
+        LoginPageEspaceAssureObject loginPageEspaceAssureObject = new();
+
+        LoginPageEspaceAssureValidations loginPageEspaceAssureValidations = new();
+
+        SouscriptionPageObject souscriptionPageObject = new();
+
         [Given(@"I try to access Ornikar Assurance-Auto front-office")]
         public void GivenITryToAccessOrnikarAssuranceAutoFrontOffice()
         {   
@@ -35,8 +41,8 @@ namespace TechnicalTestByOrnikar.Steps
             Assert.That(frontPageValidations.LandedOnOrnikarAssuranceAutoWebsite());
         }
         
-        [Given(@"I am connected to Ornikar Assurance-Auto front-office")]
-        public void GivenIAmConnectedToOrnikarAssurance_AutoFront_Office()
+        [Given(@"I am on Ornikar Assurance-Auto front-office")]
+        public void GivenIAmOnOrnikarAssurance_AutoFront_Office()
         {
             frontPageValidations.NavigateToOrnikarAssuranceAuto();
             Assert.That(frontPageValidations.LandedOnOrnikarAssuranceAutoWebsite());
@@ -57,87 +63,145 @@ namespace TechnicalTestByOrnikar.Steps
         [When(@"I click on code de la route button")]
         public void WhenIClickOnCodeDeLaRouteButton()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickTheoryButton();
         }
         
         [Then(@"I am on code page")]
         public void ThenIAmOnCodePage()
         {
-            throw new PendingStepException();
+            Assert.That(frontPageValidations.LandedOnOrnikarCodePage());
         }
-        
-        [When(@"I click on context-menu and Permis-B button is clickable")]
-        public void WhenIClickOnContext_MenuAndPermis_BButtonIsClickable()
+
+        [When(@"I click on context-menu")]
+        public void WhenIClickOnContext_Menu()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickDriverLicenseContextMenu();
         }
-        
+
         [Then(@"I click on Permis-B")]
         public void ThenIClickOnPermis_B()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickPermisBLink();
         }
         
         [Then(@"I am on Permis page")]
         public void ThenIAmOnPermisPage()
         {
-            throw new PendingStepException();
+            Assert.That(frontPageValidations.LandedOnOrnikarPermisPage());
         }
-        
-        [When(@"I click on context-menu and conduite accompagnée button is clickable")]
-        public void WhenIClickOnContext_MenuAndConduiteAccompagneeButtonIsClickable()
-        {
-            throw new PendingStepException();
-        }
-        
+               
         [Then(@"I click on conduite accompagnée")]
         public void ThenIClickOnConduiteAccompagnee()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickConduitAccompagneeLink();
         }
         
         [Then(@"I am on conduite accompagnée page")]
         public void ThenIAmOnConduiteAccompagneePage()
         {
-            throw new PendingStepException();
-        }
-        
-        [When(@"I click on context-menu and conduite button is clickable")]
-        public void WhenIClickOnContext_MenuAndConduiteButtonIsClickable()
-        {
-            throw new PendingStepException();
+            Assert.That(frontPageValidations.LandedOnOrnikarConduiteAccompagneePage);
         }
         
         [Then(@"I click on conduite")]
         public void ThenIClickOnConduite()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickConduiteLink();
         }
         
         [Then(@"I am on conduite page")]
         public void ThenIAmOnConduitePage()
         {
-            throw new PendingStepException();
-        }
-        
-        [When(@"I click on context-menu and financement CPF button is clickable")]
-        public void WhenIClickOnContext_MenuAndFinancementCPFButtonIsClickable()
-        {
-            throw new PendingStepException();
+            Assert.That(frontPageValidations.LandedOnOrnikarConduitePage());
         }
         
         [Then(@"I click on financement CPF")]
         public void ThenIClickOnFinancementCPF()
         {
-            throw new PendingStepException();
+            frontPageObject.ClickCPFLink();
         }
         
         [Then(@"I am on financement CPF page")]
         public void ThenIAmOnFinancementCPFPage()
         {
-            throw new PendingStepException();
+            Assert.That(frontPageValidations.LandedOnOrnikarFinancementCPFPage());
+        }
+        [Given(@"I move to another Ornikar's page")]
+        public void GivenIMoveToAnotherOrnikarsPage()
+        {
+            frontPageObject.ClickHomeButton();
         }
 
+        [When(@"I click on Assurance auto")]
+        public void WhenIClickOnAssuranceAuto()
+        {
+            frontPageObject.ClickInsurancePageLink();
+        }
+
+        [Then(@"I am back on Assurante-auto front page")]
+        public void ThenIAmBackOnAssurante_AutoFrontPage()
+        {
+            Assert.That(frontPageValidations.LandedOnOrnikarAssuranceAutoWebsite());
+        }
+
+        [When(@"I click on Connexion")]
+        public void WhenIClickOnConnexion()
+        {
+            frontPageObject.ClickConnexionBtn();
+        }
+
+        [Then(@"I am on login page")]
+        public void ThenIAmOnLoginPage()
+        {
+            Assert.That(loginPageEspaceAssureObject.VerifyEmailFieldPresence());
+        }
+
+        [When(@"I click J'obtiens mon tarif")]
+        public void WhenIClickJobtiensMonTarif()
+        {
+            frontPageObject.ClickOnJObtiensMonTarifButton();
+        }
+
+        [Then(@"I am on souscription page")]
+        public void ThenIAmOnSouscriptionPage()
+        {
+            Assert.That(frontPageValidations.LandedOnOrnikarSouscriptionPageResetTrue());
+        }
+
+        [Given(@"I have already started a quotation")]
+        public void GivenIHaveAlreadyStartedAQuotation()
+        {
+            frontPageObject.ClickOnJObtiensMonTarifButton();
+            souscriptionPageObject.ClickOnNonAnswerButton();
+            souscriptionPageObject.ClickOnEnregistrerEtFinirPlusTardButton();
+            souscriptionPageObject.ClickOnOrnikarLogoButton();
+            souscriptionPageObject.AcceptAlert();
+        }
+
+        [When(@"I click on Je reprends mon devis")]
+        public void WhenIClickOnJeReprendsMonDevis()
+        {
+            frontPageObject.ClickOnJeReprendsMonDevisButton();
+        }
+
+        [Then(@"I am on souscription page without reset")]
+        public void ThenIAmOnSouscriptionPageWithoutReset()
+        {
+            Assert.That(frontPageValidations.LandedOnOrnikarSouscriptionPage());
+        }
+
+        [Then(@"previous action has been saved")]
+        public void ThenPreviousActionHasBeenSaved()
+        {
+            souscriptionPageObject.VerifyIfSavedActionsFromPreviousQuotation();
+        }
+
+
+        [AfterTestRun]
+        public static void CleanUp()
+        {
+            Thread.Sleep(3000);
+            Driver.chromeDriver.Quit();
+        }
 
     }
 }
