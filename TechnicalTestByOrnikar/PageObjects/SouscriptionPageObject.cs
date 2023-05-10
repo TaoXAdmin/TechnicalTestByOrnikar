@@ -1,8 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
-using OpenQA.Selenium.DevTools.V110.CSS;
-using OpenQA.Selenium.DevTools.V110.Debugger;
-using OpenQA.Selenium.DevTools.V110.DOM;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;

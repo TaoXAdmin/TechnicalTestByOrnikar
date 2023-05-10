@@ -10,7 +10,6 @@ using TechnicalTestByOrnikar.Steps;
 using TechnicalTestByOrnikar.Utils;
 using TechTalk.SpecFlow.Events;
 using TechnicalTestByOrnikar.drivers;
-using OpenQA.Selenium.DevTools.V110.CSS;
 
 namespace TechnicalTestByOrnikar.Validations
 {

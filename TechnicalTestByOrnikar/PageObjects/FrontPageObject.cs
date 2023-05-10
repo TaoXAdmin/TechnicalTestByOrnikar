@@ -1,7 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V110.Audits;
-using OpenQA.Selenium.DevTools.V110.Page;
-using OpenQA.Selenium.DevTools.V110.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +8,6 @@ using TechnicalTestByOrnikar.Steps;
 using TechnicalTestByOrnikar.Utils;
 using TechnicalTestByOrnikar.Validations;
 using TechnicalTestByOrnikar.drivers;
-using OpenQA.Selenium.DevTools.V110.Network;
 using OpenQA.Selenium.DevTools;
 
 namespace TechnicalTestByOrnikar.PageObjects

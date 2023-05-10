@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
-using OpenQA.Selenium.DevTools.V110.Audits;
-using OpenQA.Selenium.DevTools.V110.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
