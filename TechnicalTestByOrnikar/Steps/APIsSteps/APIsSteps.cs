@@ -104,7 +104,7 @@ namespace TechnicalTestByOrnikar.Steps.APIsSteps
         public void WhenICanNotPerformAGETOnThisUser()
         {
             deal.NewAPIDealGet("https://dummy.restapiexample.com/api/v1/employee/2");
-            Assert.That(deal.Response.StatusCode.ToString().Equals("OK"));
+            Assert.That(!deal.Response.StatusCode.ToString().Equals("OK"));
         }
 
 
