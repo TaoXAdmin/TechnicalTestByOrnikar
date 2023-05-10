@@ -36,6 +36,7 @@
   <ItemGroup>
     <Folder Include="Features\APIsFeatures\" />
     <Folder Include="NewFolder\" />
+    <Folder Include="Runsettings\" />
   </ItemGroup>
 
   <ItemGroup>

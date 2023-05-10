@@ -1,6 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V110.DOM;
-using OpenQA.Selenium.DevTools.V110.Page;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
@@ -78,7 +76,7 @@ namespace TechnicalTestByOrnikar.Utils
         public void Navigate(string url)
         {
             this.Driver.Navigate().GoToUrl(url);
-            Driver.Manage().Window.FullScreen();
+            Driver.Manage().Window.Maximize();
         }
 
         public void Refresh()
